@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar color="azul">
+    <ion-title>Decoville Locações</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding color="branco">
+  <ion-list>
+    <button ion-item *ngFor="let item of produtos" (click)="itemSelecionado(item)">
+     <h6 text-capitalize>{{ item.lower }}</h6>
+   </button>
+  </ion-list>
+</ion-content>

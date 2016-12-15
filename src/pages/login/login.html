@@ -1,0 +1,21 @@
+<img src="img/logo.png" class="img"/>
+
+<hr class="border-hr">
+
+<ion-list>
+  <ion-item>
+    <ion-input type="email" placeholder="E-mail" [(ngModel)]="usercreds.email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input type="password" placeholder="Senha" [(ngModel)]="usercreds.senha"></ion-input>
+  </ion-item>
+</ion-list>
+
+<ion-list class="list-padding">
+  <button ion-button outline block (click)="login(usercreds)" color="azul">Entrar</button>
+
+  <button ion-button clear color="azul">Esqueci minha senha</button>
+
+  <button ion-button clear (click)=registrar() color="azul">Registrar</button>
+</ion-list>

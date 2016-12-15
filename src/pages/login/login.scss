@@ -1,0 +1,35 @@
+page-login {
+  .img{
+    width: 180px !important;
+    margin: auto !important;
+    display: block !important;
+    margin-top: 34px !important;
+  }
+  .item-md{
+    padding-right: 16px !important;
+    background-color: #dedede;
+  }
+
+  .list-padding{
+    padding: 16px;
+  }
+
+  .border-hr{
+    border-width: 0.5px;
+    box-sizing: border-box;
+    margin: 30px 16px 40px 16px;
+  }
+
+  .ion-page.show-page{
+    background-color: #dedede !important;
+  }
+
+  .item-md.item-input.input-has-focus .item-inner {
+    border-bottom-color: #3b5998 !important;
+    box-shadow: inset 0 -1px 0 0 #3b5998 !important;
+  }
+
+  .item-md{
+    color: #000 !important;
+  }
+}

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar color="azul">
+    <ion-title>
+      Orçamentos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor="let item of orcamentos" (click)="itemSelecionado(item)">
+     <h6 text-capitalize>{{ item.lower }}</h6>
+   </button>
+  </ion-list>
+</ion-content>

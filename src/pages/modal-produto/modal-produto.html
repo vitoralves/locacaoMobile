@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar color="azul">
+    <ion-title >
+      <h6>
+        {{produto.nome}}
+      </h6>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="fecharModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list >
+    <ion-card>
+      <p>{{imagem}}</p>
+      <img [src]="dom.bypassSecurityTrustUrl('data:image/jpeg;base64,'+produto.encode)">
+      <ion-card-content>
+        <ion-card-title>
+          <h6><b>{{produto.id_produto}} - {{produto.nome}}</b></h6>
+          </ion-card-title>
+        <p text-capitalize>
+          {{produto.descricao}}
+        </p>
+        <p class="float-right">
+          Val. Diária: {{produto.val_diaria}}
+        </p>
+        <br/>
+
+        <ion-list>
+          <ion-item>
+            <ion-label fixed>Quantidade:</ion-label>
+            <ion-input type="number">{{quantidade}}</ion-input>
+          </ion-item>
+        </ion-list>
+        <hr>
+        <button ion-button full (click)="adicionarOrcamento(produto)">Adicionar ao Orçamento</button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
