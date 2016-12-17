@@ -8,8 +8,12 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let item of orcamentos" (click)="itemSelecionado(item)">
-     <h6 text-capitalize>{{ item.lower }}</h6>
+    <button ion-item *ngFor="let item of orcamento" (click)="itemSelecionado(item)">
+     <h6>{{item.id_orcamento}} {{item.data_inicio}} {{data_fim}}</h6>
    </button>
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="secondary"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

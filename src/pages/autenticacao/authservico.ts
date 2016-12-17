@@ -11,7 +11,7 @@ export class AuthService {
 
     isLoggedin: boolean;
     AuthToken;
-    cliente: any;
+    email;
 
     constructor(public http: Http, private toast: ToastController, private platform: Platform, private alert: AlertController) {
         this.http = http;
@@ -19,18 +19,19 @@ export class AuthService {
         this.AuthToken = null;
     }
 
-    storeUserCredentials(token) {
-        window.localStorage.setItem('usuario', token);
-        this.useCredentials(token);
-
+    storeUserCredentials(idCliente) {
+        window.localStorage.setItem('usuario', idCliente);
+        this.useCredentials(idCliente);
     }
 
     useCredentials(token) {
+        //esse token é o id do cliente
         this.isLoggedin = true;
         this.AuthToken = token;
     }
 
     loadUserCredentials() {
+        //resgata o id_cliente que está salvo como token
         var token = window.localStorage.getItem('usuario');
         this.useCredentials(token);
     }
@@ -43,6 +44,8 @@ export class AuthService {
 
     autenticar(user) {
       this.checarInternet();
+      //salva email do cliente q está logando
+      this.storeUserCredentials(user.email);
       if (user.email == ""){
         this.mostrarToast("Insira seu email!");
       }else if (user.senha == ""){
@@ -113,5 +116,10 @@ export class AuthService {
 
     checarInternet() {
 
+    }
+
+    emailClienteLogado(){
+      console.log("email: "+this.email);
+      return this.email;
     }
 }

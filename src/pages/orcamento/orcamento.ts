@@ -14,13 +14,14 @@ export class OrcamentoPage {
   orcamento: any;
 
   constructor(public navCtrl: NavController, private http: Http, private service: AuthService) {
+    this.service.loadUserCredentials();
+    var idCliente = this.service.AuthToken;
+    console.log("id_cliente "+idCliente);
     if (this.novoOrcamento == false){
-      this.http.get('http://localhost:3000/api/orcamento/'+this.service.cliente.id_cliente).map(res => res.json()).subscribe(data => {
+      this.http.get('http://localhost:3000/api/orcamento/cliente/'+idCliente).map(res => res.json()).subscribe(data => {
         this.orcamento = data.data;
       });
     }
   }
-
-
 
 }

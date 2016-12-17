@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { LoadingController, ModalController, ViewController, NavController} from 'ionic-angular';
+import { LoadingController, ModalController, ViewController, NavController, PopoverController} from 'ionic-angular';
 import { ModalProdutoPage } from '../modal-produto/modal-produto';
 import 'rxjs/add/operator/toPromise';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -17,7 +17,7 @@ export class HomePage {
   produtoSelecionado: any;
 
   constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController,
-  private dom: DomSanitizer, public service: AuthService, private nav: NavController) {
+  private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController) {
   //  this.mostrarLoading();
     this.http.get('http://localhost:3000/api/produtos/').map(res => res.json()).subscribe(data => {
       this.produtos = data.data;
@@ -53,5 +53,9 @@ export class HomePage {
   logout(){
     this.service.logout();
     this.nav.setRoot(LoginPage);
+  }
+
+  abrirPopover(e){
+    
   }
 }

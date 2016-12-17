@@ -23,9 +23,9 @@ export class LoginPage {
 
     login(user) {
         this.service.autenticar(user).then(data => {
-          this.usuario = data.data;
-          this.service.cliente = data.data;
-          console.log(this.usuario.id_cliente);
+            this.usuario = data.data;
+            //salva id do cliente logado
+            this.service.storeUserCredentials(data.data.id_cliente);
             if(this.usuario.id_cliente > 0) {
               console.log("Abrir tela principal");
               this.usuarioEncontrado = true;
