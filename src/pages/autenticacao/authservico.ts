@@ -118,6 +118,11 @@ export class AuthService {
 
     }
 
+    retornaIdCliente(){
+      this.loadUserCredentials();
+      return this.AuthToken;
+    }
+
     emailClienteLogado(){
       console.log("email: "+this.email);
       return this.email;

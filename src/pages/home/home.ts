@@ -55,7 +55,21 @@ export class HomePage {
     this.nav.setRoot(LoginPage);
   }
 
-  abrirPopover(e){
-    
+  abrirPopover(ev){
   }
+
+  pesquisa(ev) {
+
+    var val = ev.target.value;
+
+     // if the value is an empty string don't filter the items
+     if (val && val.trim() != '') {
+       this.produtos = this.produtos.filter((item) => {
+         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+       })
+     }
+  }
+
+
+
 }

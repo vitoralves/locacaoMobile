@@ -6,6 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ModalProdutoPage } from '../pages/modal-produto/modal-produto';
+import { ModalNovoOrcamentoPage } from '../pages/modal-novo-orcamento/modal-novo-orcamento';
 import {LoginPage} from '../pages/login/login'
 import {CadastroPage} from '../pages/cadastro/cadastro';
 import {AuthService} from '../pages/autenticacao/authservico';
@@ -19,7 +20,8 @@ import {AuthService} from '../pages/autenticacao/authservico';
     TabsPage,
     ModalProdutoPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    ModalNovoOrcamentoPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -33,7 +35,8 @@ import {AuthService} from '../pages/autenticacao/authservico';
     TabsPage,
     ModalProdutoPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    ModalNovoOrcamentoPage
   ],
   providers: [AuthService]
 })

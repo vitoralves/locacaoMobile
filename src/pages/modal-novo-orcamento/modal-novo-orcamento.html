@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="azul">
+    <ion-title >
+      <h6>
+        Novo Orçamento
+      </h6>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="fecharModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list >
+    <ion-item>
+      <ion-label>Local Evento:</ion-label>
+      <ion-input type="text" [(ngModel)]="orcNovo.localEvento"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Data Início:</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="orcNovo.dataInicio"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Data Fim:</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="orcNovo.dataFim"></ion-datetime>
+    </ion-item>
+  </ion-list>
+  <br/>
+  <button ion-button full (click)="criarOrcamento()">Criar Orçamento</button>
+</ion-content>

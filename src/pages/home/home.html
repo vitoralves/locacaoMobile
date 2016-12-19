@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="azul">
     <ion-title>Decoville Locações</ion-title>
-    <ion-buttons start (click)="abrirPopover()">
+    <ion-buttons start (click)="abrirPopover($event)">
       <button ion-button icon-only>
         <ion-icon name="contact"></ion-icon>
       </button>
@@ -9,7 +9,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding color="branco">
+<ion-content #popoverContent padding color="branco" class="popover-page">
+  <ion-searchbar (ionInput)="pesquisa($event)"></ion-searchbar>
   <ion-list>
     <button ion-item *ngFor="let item of produtos" (click)="itemSelecionado(item)">
      <h6 text-capitalize>{{ item.lower }}</h6>
