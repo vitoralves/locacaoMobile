@@ -15,13 +15,18 @@ import {LoginPage} from '../login/login';
 export class HomePage {
   produtos: any;
   produtoSelecionado: any;
+  palavra: string = '';
+  todosProdutos;
+  searchString: string = '';
 
   constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController,
   private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController) {
   //  this.mostrarLoading();
     this.http.get('http://localhost:3000/api/produtos/').map(res => res.json()).subscribe(data => {
-      this.produtos = data.data;
+      this.produtos = data.data; // esse será usado para o filtro do searchbar será modificado
+      this.todosProdutos = data.data; // esse é estático não muda mais
     });
+
   }
 
   mostrarLoading(){
@@ -58,18 +63,26 @@ export class HomePage {
   abrirPopover(ev){
   }
 
-  pesquisa(ev) {
+  pesquisa(searchbar) {
+    //reseta lista de produtos
+    this.produtos = this.todosProdutos;
 
-    var val = ev.target.value;
+    // set q to the value of the searchbar
+    var q = searchbar.srcElement.value;
 
-     // if the value is an empty string don't filter the items
-     if (val && val.trim() != '') {
-       this.produtos = this.produtos.filter((item) => {
-         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-       })
-     }
+    // if the value is an empty string don't filter the items
+    if (!q) {
+      return;
+    }
+
+    this.produtos = this.produtos.filter((v) => {
+      if(v.lower && q) {
+        if (v.lower.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
   }
-
-
 
 }

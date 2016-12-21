@@ -1,4 +1,4 @@
-<ion-header>
+  <ion-header>
   <ion-navbar color="azul">
     <ion-title >
       <h6>
@@ -14,22 +14,27 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list >
+  <form (ngSubmit)="criarOrcamento()">
     <ion-item>
       <ion-label>Local Evento:</ion-label>
-      <ion-input type="text" [(ngModel)]="orcNovo.localEvento"></ion-input>
+      <ion-input type="text" required [(ngModel)]="orcNovo.localEvento" [ngModelOptions]="{standalone: true}" ngControl="localEvento" placeholder="Rua, Nro, Salão, etc..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Cidade:</ion-label>
+      <ion-input type="text" required [(ngModel)]="orcNovo.cidade" [ngModelOptions]="{standalone: true}" ngControl="cidade" placeholder="Cidade do evento"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Data Início:</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="orcNovo.dataInicio"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" required [(ngModel)]="orcNovo.dataInicio" [ngModelOptions]="{standalone: true}" ngControl="datainicio"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label>Data Fim:</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="orcNovo.dataFim"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" required [(ngModel)]="orcNovo.dataFim" [ngModelOptions]="{standalone: true}" ngControl="dataFim"></ion-datetime>
     </ion-item>
-  </ion-list>
-  <br/>
-  <button ion-button full (click)="criarOrcamento()">Criar Orçamento</button>
+
+    <button ion-button full type="submit">Criar Orçamento</button>
+  </form>
 </ion-content>

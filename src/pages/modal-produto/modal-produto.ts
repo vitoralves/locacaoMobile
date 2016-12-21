@@ -1,13 +1,12 @@
 import {DomSanitizer} from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { AlertController, ToastController, ModalController, NavParams, ViewController } from 'ionic-angular';
-import {OrcamentoPage} from '../orcamento/orcamento';
 import {ModalNovoOrcamentoPage} from '../modal-novo-orcamento/modal-novo-orcamento';
+import {Funcoes} from '../util/funcoes';
 
 @Component({
   selector: 'page-modal-produto',
   templateUrl: 'modal-produto.html',
-  providers: [OrcamentoPage]
 })
 export class ModalProdutoPage {
   produto: any;
@@ -15,7 +14,7 @@ export class ModalProdutoPage {
   quantidade: number;
 
   constructor(public modal: ModalController, public nav: NavParams, private dom: DomSanitizer, private viewCtrl: ViewController,
-    private alert: AlertController, public orcamento: OrcamentoPage, private toast: ToastController) {
+    private alert: AlertController, private toast: ToastController, private funcao: Funcoes) {
     this.produto = nav.get("parametro");
   }
 
@@ -26,7 +25,7 @@ export class ModalProdutoPage {
   adicionarOrcamento(produto){
     console.log(this.quantidade);
     if (this.quantidade > 0){
-      if (this.orcamento.novoOrcamento == false){
+      if (this.funcao.retornaStatusOrcamento() == false){ // não tem novo orçamento criado ainda
         let modal = this.modal.create(ModalNovoOrcamentoPage);
         modal.present();
       }

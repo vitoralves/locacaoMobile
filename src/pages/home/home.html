@@ -11,6 +11,7 @@
 
 <ion-content #popoverContent padding color="branco" class="popover-page">
   <ion-searchbar (ionInput)="pesquisa($event)"></ion-searchbar>
+  <hr>
   <ion-list>
     <button ion-item *ngFor="let item of produtos" (click)="itemSelecionado(item)">
      <h6 text-capitalize>{{ item.lower }}</h6>
