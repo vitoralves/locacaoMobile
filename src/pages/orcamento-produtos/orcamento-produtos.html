@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="azul">
+    <ion-title >
+      <h6>
+        Itens Orçamento
+      </h6>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="fecharModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <p class="fonte">Dados Orçamento:</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50><b>Data início:</b> {{dataInicio}}</ion-col>
+      <ion-col width-50><b>Data fim:</b> {{dataFim}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-50><b>Local evento:</b> {{local}}</ion-col>
+      <ion-col width-50><b>Cidade:</b> {{cidade}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list >
+    <ion-list-header>
+      Produtos:
+    </ion-list-header>
+    <ion-item *ngFor="let item of produtosList">Angola</ion-item>
+  </ion-list>
+  
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" (click)="insereProduto()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

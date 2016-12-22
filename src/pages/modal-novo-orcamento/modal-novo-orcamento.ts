@@ -3,6 +3,7 @@ import {ToastController, ModalController, NavParams, ViewController } from 'ioni
 import {Http, Headers} from '@angular/http';
 import {AuthService} from '../autenticacao/authservico';
 import {Funcoes} from '../util/funcoes';
+import {OrcamentoProdutosPage} from '../orcamento-produtos/orcamento-produtos';
 
 @Component({
   selector: 'page-modal-novo-orcamento',
@@ -33,11 +34,16 @@ export class ModalNovoOrcamentoPage {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     console.log(this.orcNovo);
+    var stringInsert = this.orcNovo.cliente+"/"+this.orcNovo.dataInicio+"/"+this.orcNovo.dataFim+"/"+this.orcNovo.localEvento+"/"+this.orcNovo.situacao+"/"+this.orcNovo.cidade;
     return new Promise(resolve => {
-        this.http.post('http://localhost:3000/api/orcamento/add/'+this.orcNovo, {headers: headers}).subscribe(status => {
+        this.http.post('http://localhost:3000/api/orcamento/add/'+stringInsert, {headers: headers}).subscribe(status => {
             console.log("status"+status.status);
             if(status.status == 200){
                 resolve(true);
+                this.mostrarToast("Novo orçamento criado!");
+                this.fecharModal();
+                let modal = this.modal.create(OrcamentoProdutosPage, {dataInicio: this.orcNovo.dataInicio, dataFim: this.orcNovo.dataFim, local: this.orcNovo.localEvento, cidade:this.orcNovo.cidade});
+                modal.present();
             }else
                 resolve(false);
         });

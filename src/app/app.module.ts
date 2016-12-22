@@ -10,6 +10,8 @@ import { ModalNovoOrcamentoPage } from '../pages/modal-novo-orcamento/modal-novo
 import {LoginPage} from '../pages/login/login'
 import {CadastroPage} from '../pages/cadastro/cadastro';
 import {AuthService} from '../pages/autenticacao/authservico';
+import {OrcamentoProdutosPage} from '../pages/orcamento-produtos/orcamento-produtos';
+import {EscolheProdutosPage} from '../pages/modal-escolhe-produtos/modal-escolhe-produtos';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {AuthService} from '../pages/autenticacao/authservico';
     ModalProdutoPage,
     LoginPage,
     CadastroPage,
-    ModalNovoOrcamentoPage
+    ModalNovoOrcamentoPage,
+    OrcamentoProdutosPage,
+    EscolheProdutosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,7 +40,9 @@ import {AuthService} from '../pages/autenticacao/authservico';
     ModalProdutoPage,
     LoginPage,
     CadastroPage,
-    ModalNovoOrcamentoPage
+    ModalNovoOrcamentoPage,
+    OrcamentoProdutosPage,
+    EscolheProdutosPage
   ],
   providers: [AuthService]
 })

@@ -40,4 +40,16 @@ export class OrcamentoPage {
     modal.present();
   }
 
+
+  atualizaOrcamentos(){
+    this.service.loadUserCredentials();
+    var idCliente = this.service.AuthToken;
+    console.log("id_cliente "+idCliente);
+    if (this.funcao.retornaStatusOrcamento() == false){
+      this.http.get('http://localhost:3000/api/orcamento/cliente/'+idCliente).map(res => res.json()).subscribe(data => {
+        this.orcamento = data.data;
+      });
+    }
+  }
+
 }

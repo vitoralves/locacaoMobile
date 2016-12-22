@@ -16,4 +16,12 @@ export class Funcoes {
     }
   }
 
+  salvaListaProdutos(lista){
+    window.localStorage.setItem('produtos', lista);
+  }
+
+  retornaListaProdutos(){
+    return window.localStorage.getItem('produtos');
+  }
+
 }

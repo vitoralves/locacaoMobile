@@ -7,10 +7,12 @@ import 'rxjs/add/operator/toPromise';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AuthService} from '../autenticacao/authservico';
 import {LoginPage} from '../login/login';
+import {Funcoes} from '../util/funcoes'
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+  providers: [Funcoes]
 })
 export class HomePage {
   produtos: any;
@@ -20,11 +22,12 @@ export class HomePage {
   searchString: string = '';
 
   constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController,
-  private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController) {
+  private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController, private util: Funcoes) {
   //  this.mostrarLoading();
     this.http.get('http://localhost:3000/api/produtos/').map(res => res.json()).subscribe(data => {
       this.produtos = data.data; // esse será usado para o filtro do searchbar será modificado
       this.todosProdutos = data.data; // esse é estático não muda mais
+      this.util.salvaListaProdutos(this.todosProdutos);
     });
 
   }

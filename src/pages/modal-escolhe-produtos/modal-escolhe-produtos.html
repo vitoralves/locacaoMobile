@@ -1,0 +1,20 @@
+<ion-header>
+<ion-navbar color="azul">
+  <ion-title >
+    Insere Produto
+  </ion-title>
+  <ion-buttons start>
+    <button ion-button icon-only (click)="fecharModal()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+</ion-header>
+
+<ion-content padding color="branco">
+  <ion-list>
+    <button ion-item *ngFor="let item of produtos" (click)="insereProdutoOrcamento(item)">
+      <h6 text-capitalize>{{ item.lower }}</h6>
+    </button>
+  </ion-list>
+</ion-content>

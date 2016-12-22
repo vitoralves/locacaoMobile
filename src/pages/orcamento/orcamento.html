@@ -8,9 +8,11 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let item of orcamento" (click)="itemSelecionado(item)">
-     <h6>{{item.id_orcamento}} {{item.data_inicio}} {{data_fim}}</h6>
-   </button>
+    <ion-item *ngFor="let item of orcamento">
+     <p>{{item.id_orcamento}} {{item.localevento}}, {{item.cidade}}</p>
+     <p>De:{{item.data_inicio}}  Até:{{item.data_fim}}
+     <p>Situação:{{item.situacao}}</p>
+   </ion-item>
   </ion-list>
 
   <ion-fab right bottom>
