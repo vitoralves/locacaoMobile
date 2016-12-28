@@ -12,6 +12,8 @@ import {CadastroPage} from '../pages/cadastro/cadastro';
 import {AuthService} from '../pages/autenticacao/authservico';
 import {OrcamentoProdutosPage} from '../pages/orcamento-produtos/orcamento-produtos';
 import {EscolheProdutosPage} from '../pages/modal-escolhe-produtos/modal-escolhe-produtos';
+import {PopoverPage} from '../pages/popover/popover-component';
+import {PerfilPage} from '../pages/perfil/perfil';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {EscolheProdutosPage} from '../pages/modal-escolhe-produtos/modal-escolhe
     CadastroPage,
     ModalNovoOrcamentoPage,
     OrcamentoProdutosPage,
-    EscolheProdutosPage
+    EscolheProdutosPage,
+    PopoverPage,
+    PerfilPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -42,7 +46,9 @@ import {EscolheProdutosPage} from '../pages/modal-escolhe-produtos/modal-escolhe
     CadastroPage,
     ModalNovoOrcamentoPage,
     OrcamentoProdutosPage,
-    EscolheProdutosPage
+    EscolheProdutosPage,
+    PopoverPage,
+    PerfilPage
   ],
   providers: [AuthService]
 })

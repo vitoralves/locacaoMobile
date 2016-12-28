@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {ToastController,Platform, AlertController} from 'ionic-angular';
-
+import {LoginPage} from '../login/login';
 
 declare var navigator: any;
 declare var Connection: any;
@@ -63,7 +63,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
         return new Promise(resolve => {
-            this.http.post('http://localhost:3000/api/add/'+creds, {headers: headers}).subscribe(status => {
+            this.http.put('http://localhost:3000/api/add/'+creds, {headers: headers}).subscribe(status => {
                 console.log("status"+status.status);
                 if(status.status == 200){
                     resolve(true);
@@ -98,8 +98,9 @@ export class AuthService {
     }
 
 
-    logout() {
+    logout(navigation) {
         this.destroyUserCredentials();
+        navigation.setRoot(LoginPage);
     }
 
     mostrarToast(mensagem){

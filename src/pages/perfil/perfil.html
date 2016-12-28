@@ -1,0 +1,35 @@
+<ion-header>
+<ion-navbar color="azul">
+  <ion-title >
+    Perfil
+  </ion-title>
+  <ion-buttons start>
+    <button ion-button icon-only (click)="fecharModal()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+</ion-header>
+
+<ion-content padding color="branco">
+  <ion-list>
+    <ion-item>
+      <ion-label >Nome:</ion-label>
+      <ion-input type="text" [(ngModel)]="cliente.nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label >Sobrenome:</ion-label>
+      <ion-input type="text" [(ngModel)]="cliente.sobrenome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label >Email:</ion-label>
+      <ion-input type="text" [(ngModel)]="cliente.email"></ion-input>
+    </ion-item>
+
+    <br />
+    <button ion-button block (click)="salvar()">Salvar Alterações</button>
+  </ion-list>
+
+</ion-content>

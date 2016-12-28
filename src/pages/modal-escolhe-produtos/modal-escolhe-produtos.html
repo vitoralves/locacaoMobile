@@ -1,7 +1,7 @@
 <ion-header>
 <ion-navbar color="azul">
   <ion-title >
-    Insere Produto
+    Escolha seus Produtos
   </ion-title>
   <ion-buttons start>
     <button ion-button icon-only (click)="fecharModal()">
@@ -12,9 +12,24 @@
 </ion-header>
 
 <ion-content padding color="branco">
+  <ion-searchbar (ionInput)="pesquisa($event)" placeholder="Pesquisa"></ion-searchbar>
+  <hr>
   <ion-list>
-    <button ion-item *ngFor="let item of produtos" (click)="insereProdutoOrcamento(item)">
-      <h6 text-capitalize>{{ item.lower }}</h6>
-    </button>
+    <ion-item  *ngFor="let item of produtos">
+      <ion-thumbnail item-left>
+        <img [src]="dom.bypassSecurityTrustUrl('data:image/jpeg;base64,'+item.encode)">
+      </ion-thumbnail>
+      <p><b>{{item.id_produto}}-{{item.nome}}</b></p>
+      <p>{{item.descricao}}</p>
+      <p><b>Valor Unit:</b> {{item.val_diaria}}</p>
+      <button ion-button icon-left>
+        <ion-icon name="eye"></ion-icon>
+        Ver
+      </button>
+      <button ion-button color="primary" icon-left (click)="insereProdutoOrcamento(item)">
+        <ion-icon name="add"></ion-icon>
+        Add
+      </button>
+        </ion-item>
   </ion-list>
 </ion-content>

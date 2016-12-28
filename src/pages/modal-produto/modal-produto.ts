@@ -7,6 +7,7 @@ import {Funcoes} from '../util/funcoes';
 @Component({
   selector: 'page-modal-produto',
   templateUrl: 'modal-produto.html',
+  providers: [Funcoes]
 })
 export class ModalProdutoPage {
   produto: any;

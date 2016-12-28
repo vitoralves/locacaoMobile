@@ -36,7 +36,7 @@ export class ModalNovoOrcamentoPage {
     console.log(this.orcNovo);
     var stringInsert = this.orcNovo.cliente+"/"+this.orcNovo.dataInicio+"/"+this.orcNovo.dataFim+"/"+this.orcNovo.localEvento+"/"+this.orcNovo.situacao+"/"+this.orcNovo.cidade;
     return new Promise(resolve => {
-        this.http.post('http://localhost:3000/api/orcamento/add/'+stringInsert, {headers: headers}).subscribe(status => {
+        this.http.put('http://localhost:3000/api/orcamento/add/'+stringInsert, {headers: headers}).subscribe(status => {
             console.log("status"+status.status);
             if(status.status == 200){
                 resolve(true);

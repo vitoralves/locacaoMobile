@@ -6,8 +6,9 @@ import { ModalProdutoPage } from '../modal-produto/modal-produto';
 import 'rxjs/add/operator/toPromise';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AuthService} from '../autenticacao/authservico';
-import {LoginPage} from '../login/login';
-import {Funcoes} from '../util/funcoes'
+import {Funcoes} from '../util/funcoes';
+import {PopoverPage} from "../popover/popover-component";
+
 
 @Component({
   selector: 'page-home',
@@ -20,6 +21,8 @@ export class HomePage {
   palavra: string = '';
   todosProdutos;
   searchString: string = '';
+  categoriaSelecionada = 'Tudo';
+  categorias: any;
 
   constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController,
   private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController, private util: Funcoes) {
@@ -27,7 +30,11 @@ export class HomePage {
     this.http.get('http://localhost:3000/api/produtos/').map(res => res.json()).subscribe(data => {
       this.produtos = data.data; // esse será usado para o filtro do searchbar será modificado
       this.todosProdutos = data.data; // esse é estático não muda mais
-      this.util.salvaListaProdutos(this.todosProdutos);
+    });
+
+    this.http.get('http://localhost:3000/api/categorias/').map(res => res.json()).subscribe(data => {
+      this.categorias = data.data;
+      console.log(this.categorias);
     });
 
   }
@@ -59,11 +66,12 @@ export class HomePage {
   }
 
   logout(){
-    this.service.logout();
-    this.nav.setRoot(LoginPage);
+    this.viewCtrl.dismiss();
   }
 
-  abrirPopover(ev){
+  abrirPopover(event) {
+    let popover = this.popover.create(PopoverPage);
+    popover.present({ ev: event });
   }
 
   pesquisa(searchbar) {
@@ -81,6 +89,25 @@ export class HomePage {
     this.produtos = this.produtos.filter((v) => {
       if(v.lower && q) {
         if (v.lower.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+  }
+
+  alteraCategoria(event){
+    //reseta lista de produtos
+    this.produtos = this.todosProdutos;
+
+    // if the value is an empty string don't filter the items
+    if (event == 'Tudo') {
+      return;
+    }
+
+    this.produtos = this.produtos.filter((v) => {
+      if(v.categoria && event) {
+        if (v.categoria.toString().indexOf(event.toString()) > -1) {
           return true;
         }
         return false;

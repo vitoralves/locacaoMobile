@@ -10,8 +10,6 @@
 </ion-header>
 
 <ion-content padding color="branco" >
-  <ion-searchbar (ionInput)="pesquisa($event)" placeholder="Pesquisa"></ion-searchbar>
-  <br />
   <ion-list>
     <ion-item class="button-inner-select" >
       <ion-label class="margin-left-label"><b>Categoria:</b></ion-label>
@@ -21,7 +19,10 @@
       </ion-select>
     </ion-item>
   </ion-list>
+
+  <ion-searchbar (ionInput)="pesquisa($event)" placeholder="Pesquisa"></ion-searchbar>
   <hr>
+  <br />
   <ion-list>
     <button ion-item *ngFor="let item of produtos" (click)="itemSelecionado(item)">
       <h6 text-capitalize>{{ item.lower }}</h6>
