@@ -13,18 +13,28 @@
 
 <ion-content padding color="branco">
   <ion-searchbar (ionInput)="pesquisa($event)" placeholder="Pesquisa"></ion-searchbar>
+  <br />
+  <ion-list>
+    <ion-item class="button-inner-select" >
+      <ion-label class="margin-left-label"><b>Categoria:</b></ion-label>
+      <ion-select [(ngModel)]="categoriaSelecionada" cancelText="Cancelar" (ionChange)="alteraCategoria($event)">
+        <ion-option value="Tudo" selected="true">Tudo</ion-option>
+        <ion-option  *ngFor="let cat of categorias" value="{{cat.id_categoria}}">{{cat.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
   <hr>
   <ion-list>
     <ion-item  *ngFor="let item of produtos">
       <ion-thumbnail item-left>
-        <img [src]="dom.bypassSecurityTrustUrl('data:image/jpeg;base64,'+item.encode)">
+        <img [src]="dom.bypassSecurityTrustUrl('data:image/jpeg;base64,'+item.encode)" >
       </ion-thumbnail>
       <p><b>{{item.id_produto}}-{{item.nome}}</b></p>
       <p>{{item.descricao}}</p>
-      <p><b>Valor Unit:</b> {{item.val_diaria}}</p>
-      <button ion-button icon-left>
-        <ion-icon name="eye"></ion-icon>
-        Ver
+      <!--<p><b>Valor Unit:</b> {{item.val_diaria}}</p>-->
+      <button ion-button icon-left (click)="ampliaImagem()">
+        <ion-icon name="image"></ion-icon>
+        Ampliar
       </button>
       <button ion-button color="primary" icon-left (click)="insereProdutoOrcamento(item)">
         <ion-icon name="add"></ion-icon>

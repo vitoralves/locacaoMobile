@@ -11,6 +11,7 @@ export class OrcamentoProdutosPage {
   dataFim;
   local;
   cidade;
+  orcamento;
   produtosList;
 
   constructor(private modal: ModalController, private nav: NavParams, private view: ViewController) {
@@ -18,6 +19,7 @@ export class OrcamentoProdutosPage {
     this.dataFim = nav.get("dataFim");
     this.local = nav.get("local");
     this.cidade = nav.get("cidade");
+    this.orcamento = nav.get("orcamento");
   }
 
   ngOnInit(){

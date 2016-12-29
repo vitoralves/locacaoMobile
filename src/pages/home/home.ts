@@ -34,7 +34,6 @@ export class HomePage {
 
     this.http.get('http://localhost:3000/api/categorias/').map(res => res.json()).subscribe(data => {
       this.categorias = data.data;
-      console.log(this.categorias);
     });
 
   }

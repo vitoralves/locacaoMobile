@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NavController, ModalController, ViewController } from 'ionic-angular';
 import {AuthService} from '../autenticacao/authservico';
@@ -50,6 +50,24 @@ export class OrcamentoPage {
         this.orcamento = data.data;
       });
     }
+  }
+
+  ocultar(item){
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    return new Promise(resolve => {
+        this.http.put('http://localhost:3000/api/orcamento/ocultar/'+item.id_orcamento, {headers: headers}).subscribe(status => {
+            console.log("status"+status.status);
+            if(status.status == 200){
+                this.funcao.mostrarToast("Orcamento nº"+item.id_orcamento+" ocultado.");
+                this.atualizaOrcamentos();
+                resolve(true);
+            }else
+                this.funcao.mostrarToast("Não foi possível ocultar orçamento!");
+                resolve(false);
+        });
+    });
   }
 
 }

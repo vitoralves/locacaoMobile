@@ -12,6 +12,10 @@
      <p>{{item.id_orcamento}} {{item.localevento}}, {{item.cidade}}</p>
      <p>De:{{item.data_inicio}}  Até:{{item.data_fim}}
      <p>Situação:{{item.situacao}}</p>
+     <button ion-button outline icon-left item-right color="danger" (click)="ocultar(item)">
+       <ion-icon name="eye-off"></ion-icon>
+       Ocultar
+     </button>
    </ion-item>
   </ion-list>
 

@@ -15,8 +15,12 @@
 
 <ion-content padding>
 
-  <p class="fonte">Dados Orçamento:</p>
+  <h4 style="text-decoration: underline"><b>Dados do Orçamento:</b></h4>
   <ion-grid>
+    <ion-row>
+      <ion-col><h6><b>Orçamento Nº: {{orcamento}}</b></h6></ion-col>
+    </ion-row>
+
     <ion-row>
       <ion-col width-50><b>Data início:</b> {{dataInicio}}</ion-col>
       <ion-col width-50><b>Data fim:</b> {{dataFim}}</ion-col>
@@ -33,7 +37,7 @@
     </ion-list-header>
     <ion-item *ngFor="let item of produtosList">Angola</ion-item>
   </ion-list>
-  
+
   <ion-fab right bottom>
     <button ion-fab color="secondary" (click)="insereProduto()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
