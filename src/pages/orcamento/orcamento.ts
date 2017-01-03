@@ -37,6 +37,9 @@ export class OrcamentoPage {
 
   criaOrcamento(){
     let modal = this.modal.create(ModalNovoOrcamentoPage);
+    modal.onDidDismiss(data =>{
+      this.atualizaOrcamentos();
+    });
     modal.present();
   }
 

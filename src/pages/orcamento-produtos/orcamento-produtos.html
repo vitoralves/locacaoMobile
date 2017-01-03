@@ -5,11 +5,11 @@
         Itens Orçamento
       </h6>
     </ion-title>
-    <ion-buttons start>
-      <button ion-button icon-only (click)="fecharModal()">
-        <ion-icon name="close"></ion-icon>
+    <!--<ion-buttons start>
+      <button ion-button outline (click)="finalizarOrcamento()" color="branco">
+        FINALIZAR
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
@@ -32,13 +32,42 @@
   </ion-grid>
 
   <ion-list >
-    <ion-list-header>
+    <ion-list-header class="fonte">
       Produtos:
     </ion-list-header>
-    <ion-item *ngFor="let item of produtosList">Angola</ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col width-80><b>Nome</b></ion-col>
+        <ion-col width-20><b>Qnt</b></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-item-sliding *ngFor="let item of produtosList">
+        <ion-item>
+          <ion-row>
+            <ion-col width-80><p text-capitalize>{{item.nome}}</p></ion-col>
+            <ion-col width-20><p>{{item.quantidade}}</p></ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button (click)="removeritem(item)" color="danger">
+            <ion-icon name="trash"></ion-icon>
+            Remover
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-grid>
+
+
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab color="secondary" (click)="insereProduto()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="primary"><ion-icon name="arrow-up"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="insereProduto()" color="secondary"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab color="azul" (click)="enviaOrcamento()" ><ion-icon name="send"></ion-icon></button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>

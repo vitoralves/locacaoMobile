@@ -1,0 +1,13 @@
+<ion-header>
+<ion-navbar color="preto">
+  <ion-buttons>
+    <button ion-button icon-only (click)="fecharModal()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+</ion-header>
+
+<ion-content >
+  <img [src]="dom.bypassSecurityTrustUrl('data:image/jpeg;base64,'+retornaImg())" >
+</ion-content>

@@ -20,6 +20,15 @@ page-orcamento-produtos {
   }
 
   .fonte{
-
+    font-size: large !important;
   }
+
+  .list-header-md{
+      margin-bottom: 0px !important;
+  }
+
+  ion-grid{
+    padding: 0px !important;
+  }
+
 }

@@ -4,6 +4,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {Funcoes} from '../util/funcoes';
 import { Http, Headers } from '@angular/http';
 import {AuthService} from '../autenticacao/authservico';
+import {ZoomImagemPage} from '../modal-zoom-imagem/modal-zoom-imagem';
 
 @Component({
   selector: 'escolhe-orcamento-produtos',
@@ -114,5 +115,9 @@ export class EscolheProdutosPage {
     });
   }
 
+  ampliaImagem(item){
+    let modal = this.modal.create(ZoomImagemPage, {imagem: item.encode});
+    modal.present();
+  }
 
 }

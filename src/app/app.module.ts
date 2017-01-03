@@ -14,6 +14,7 @@ import {OrcamentoProdutosPage} from '../pages/orcamento-produtos/orcamento-produ
 import {EscolheProdutosPage} from '../pages/modal-escolhe-produtos/modal-escolhe-produtos';
 import {PopoverPage} from '../pages/popover/popover-component';
 import {PerfilPage} from '../pages/perfil/perfil';
+import {ZoomImagemPage} from '../pages/modal-zoom-imagem/modal-zoom-imagem';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {PerfilPage} from '../pages/perfil/perfil';
     OrcamentoProdutosPage,
     EscolheProdutosPage,
     PopoverPage,
-    PerfilPage
+    PerfilPage,
+    ZoomImagemPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -48,7 +50,8 @@ import {PerfilPage} from '../pages/perfil/perfil';
     OrcamentoProdutosPage,
     EscolheProdutosPage,
     PopoverPage,
-    PerfilPage
+    PerfilPage,
+    ZoomImagemPage
   ],
   providers: [AuthService]
 })

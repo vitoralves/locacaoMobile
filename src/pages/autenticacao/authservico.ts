@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {ToastController,Platform, AlertController} from 'ionic-angular';
-import {LoginPage} from '../login/login';
 
 declare var navigator: any;
 declare var Connection: any;
@@ -98,9 +97,8 @@ export class AuthService {
     }
 
 
-    logout(navigation) {
+    logout() {
         this.destroyUserCredentials();
-        navigation.setRoot(LoginPage);
     }
 
     mostrarToast(mensagem){
