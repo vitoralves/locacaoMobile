@@ -5,11 +5,11 @@
         Itens Orçamento
       </h6>
     </ion-title>
-    <!--<ion-buttons start>
-      <button ion-button outline (click)="finalizarOrcamento()" color="branco">
-        FINALIZAR
+    <ion-buttons start>
+      <button ion-button outline (click)="cancelarOrcamento()" color="branco">
+        CANCELAR
       </button>
-    </ion-buttons>-->
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -66,8 +66,8 @@
   <ion-fab right bottom>
     <button ion-fab color="primary"><ion-icon name="arrow-up"></ion-icon></button>
     <ion-fab-list side="top">
-      <button ion-fab (click)="insereProduto()" color="secondary"><ion-icon name="add"></ion-icon></button>
-      <button ion-fab color="azul" (click)="enviaOrcamento()" ><ion-icon name="send"></ion-icon></button>
+      <button ion-fab (click)="insereProduto()"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab (click)="enviaOrcamento()" ><ion-icon name="send"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

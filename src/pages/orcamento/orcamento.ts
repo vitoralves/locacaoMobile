@@ -25,7 +25,7 @@ export class OrcamentoPage {
     var idCliente = this.service.AuthToken;
     console.log("id_cliente "+idCliente);
     if (this.funcao.retornaStatusOrcamento() == false){
-      this.http.get('http://localhost:3000/api/orcamento/cliente/'+idCliente).map(res => res.json()).subscribe(data => {
+      this.http.get('http://192.168.1.108:3000/api/orcamento/cliente/'+idCliente).map(res => res.json()).subscribe(data => {
         this.orcamento = data.data;
       });
     }
@@ -49,7 +49,7 @@ export class OrcamentoPage {
     var idCliente = this.service.AuthToken;
     console.log("id_cliente "+idCliente);
     if (this.funcao.retornaStatusOrcamento() == false){
-      this.http.get('http://localhost:3000/api/orcamento/cliente/'+idCliente).map(res => res.json()).subscribe(data => {
+      this.http.get('http://192.168.1.108:3000/api/orcamento/cliente/'+idCliente).map(res => res.json()).subscribe(data => {
         this.orcamento = data.data;
       });
     }
@@ -60,7 +60,7 @@ export class OrcamentoPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return new Promise(resolve => {
-        this.http.put('http://localhost:3000/api/orcamento/ocultar/'+item.id_orcamento, {headers: headers}).subscribe(status => {
+        this.http.put('http://192.168.1.108:3000/api/orcamento/ocultar/'+item.id_orcamento, {headers: headers}).subscribe(status => {
             console.log("status"+status.status);
             if(status.status == 200){
                 this.funcao.mostrarToast("Orcamento nº"+item.id_orcamento+" ocultado.");

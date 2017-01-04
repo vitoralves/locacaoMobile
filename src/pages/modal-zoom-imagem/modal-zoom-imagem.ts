@@ -10,7 +10,7 @@ export class ZoomImagemPage {
 
   imagem;
 
-  constructor(private modal: ModalController, private nav: NavParams, private view: ViewController, private dom: DomSanitizer, public navCtrl: NavController) {
+  constructor(private modal: ModalController, private nav: NavParams, private view: ViewController, public dom: DomSanitizer, public navCtrl: NavController) {
       this.imagem = nav.get("imagem");
   }
 

@@ -24,10 +24,7 @@ export class OrcamentoProdutosPage {
     this.local = nav.get("local");
     this.cidade = nav.get("cidade");
     this.orcamento = nav.get("orcamento");
-  }
-
-  ngOnInit(){
-      console.log("on init");
+    this.procuraProdutos();
   }
 
   salvarItensOrcamento(lista){
@@ -44,7 +41,7 @@ export class OrcamentoProdutosPage {
   }
 
   procuraProdutos(){
-    this.http.get('http://localhost:3000/api/itensOrcamento/'+this.util.retornaIdOrcamento()).map(res => res.json()).subscribe(data => {
+    this.http.get('http://192.168.1.108:3000/api/itensOrcamento/'+this.util.retornaIdOrcamento()).map(res => res.json()).subscribe(data => {
       this.produtosList = data.data;
     });
   }
@@ -68,7 +65,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://localhost:3000/api/itensOrcamento/delete/'+item.id_item, {headers: headers}).subscribe(status => {
+                  this.http.put('http://192.168.1.108:3000/api/itensOrcamento/delete/'+item.id_item, {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast(item.nome+" removido do orçamento.");
@@ -108,7 +105,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://localhost:3000/api/orcamento/confirmar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
+                  this.http.put('http://192.168.1.108:3000/api/orcamento/confirmar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast("Orçamento enviado! Entraremos em contado, obrigado!");
@@ -116,6 +113,43 @@ export class OrcamentoProdutosPage {
                           resolve(true);
                       }else
                           this.util.mostrarToast("Não foi possível remover este item do orçamento!");
+                          resolve(false);
+                  });
+              });
+            }
+          }
+        ]
+      });
+      alert.present();
+  }
+
+  cancelarOrcamento(){
+    let alert = this.alert.create({
+        title: 'Cancelar Orçamento',
+        message: 'Têm certeza que deseja cancelar este orçamento? O progesso será perdido.',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancelar',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              var headers = new Headers();
+              headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+              return new Promise(resolve => {
+                  this.http.put('http://192.168.1.108:3000/api/orcamento/cancelar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
+                      console.log("status"+status.status);
+                      if(status.status == 200){
+                          this.util.mostrarToast("Orçamento cancelado!");
+                          this.view.dismiss();
+                          resolve(true);
+                      }else
+                          this.util.mostrarToast("Não foi possível cancelar esse orçamento!");
                           resolve(false);
                   });
               });

@@ -27,12 +27,12 @@ export class HomePage {
   constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController,
   private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController, private util: Funcoes) {
   //  this.mostrarLoading();
-    this.http.get('http://localhost:3000/api/produtos/').map(res => res.json()).subscribe(data => {
+    this.http.get('http://192.168.1.108:3000/api/produtos/').map(res => res.json()).subscribe(data => {
       this.produtos = data.data; // esse será usado para o filtro do searchbar será modificado
       this.todosProdutos = data.data; // esse é estático não muda mais
     });
 
-    this.http.get('http://localhost:3000/api/categorias/').map(res => res.json()).subscribe(data => {
+    this.http.get('http://192.168.1.108:3000/api/categorias/').map(res => res.json()).subscribe(data => {
       this.categorias = data.data;
     });
 
@@ -56,7 +56,7 @@ export class HomePage {
 
   pesquisaProdutoPorId(id){
     this.produtoSelecionado = null;
-    return this.http.get('http://localhost:3000/api/produtos/'+ id).map(res => res.json()).toPromise();
+    return this.http.get('http://192.168.1.108:3000/api/produtos/'+ id).map(res => res.json()).toPromise();
   }
 
   modalProdutoSelecionado(){

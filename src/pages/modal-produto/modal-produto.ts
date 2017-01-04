@@ -14,7 +14,7 @@ export class ModalProdutoPage {
   imagem: any;
   quantidade: number;
 
-  constructor(public modal: ModalController, public nav: NavParams, private dom: DomSanitizer, private viewCtrl: ViewController,
+  constructor(public modal: ModalController, public nav: NavParams, public dom: DomSanitizer, private viewCtrl: ViewController,
     private alert: AlertController, private toast: ToastController, private funcao: Funcoes) {
     this.produto = nav.get("parametro");
   }
@@ -26,10 +26,11 @@ export class ModalProdutoPage {
   adicionarOrcamento(produto){
     console.log(this.quantidade);
     if (this.quantidade > 0){
-      if (this.funcao.retornaStatusOrcamento() == false){ // não tem novo orçamento criado ainda
-        let modal = this.modal.create(ModalNovoOrcamentoPage);
-        modal.present();
-      }
+      let modal = this.modal.create(ModalNovoOrcamentoPage, {produto: produto.id_produto, quantidade: this.quantidade});
+      modal.onDidDismiss(data =>{
+        this.viewCtrl.dismiss();
+      });
+      modal.present();
     }else{
       let alert = this.alert.create({
           title: 'Atenção',
