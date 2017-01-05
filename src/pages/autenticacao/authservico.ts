@@ -51,7 +51,7 @@ export class AuthService {
         this.mostrarToast("Insira sua senha!");
       }else{
         var creds = user.email+"/"+user.senha;
-        return this.http.get('http://192.168.1.108:3000/api/auth/'+ creds).map(res => res.json()).toPromise();
+        return this.http.get('http://52.40.117.136:3000/api/auth/'+ creds).map(res => res.json()).toPromise();
       }
     }
 
@@ -62,7 +62,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
         return new Promise(resolve => {
-            this.http.put('http://192.168.1.108:3000/api/add/'+creds, {headers: headers}).subscribe(status => {
+            this.http.put('http://52.40.117.136:3000/api/add/'+creds, {headers: headers}).subscribe(status => {
                 console.log("status"+status.status);
                 if(status.status == 200){
                     resolve(true);
@@ -110,7 +110,7 @@ export class AuthService {
     }
 
     emailCadastrado(email){
-      return this.http.get('http://192.168.1.108:3000/api/email/'+ email).map(res => res.json()).toPromise();
+      return this.http.get('http://52.40.117.136:3000/api/email/'+ email).map(res => res.json()).toPromise();
     }
 
     checarInternet() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import {ModalController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
 import {EscolheProdutosPage} from '../modal-escolhe-produtos/modal-escolhe-produtos';
 import { Http, Headers } from '@angular/http';
 import {Funcoes} from '../util/funcoes';
@@ -17,8 +17,9 @@ export class OrcamentoProdutosPage {
   cidade;
   orcamento;
   produtosList;
+  load;
 
-  constructor(private modal: ModalController, private nav: NavParams, private view: ViewController, private http: Http, private util: Funcoes, private alert: AlertController) {
+  constructor(private modal: ModalController, private nav: NavParams, private loading: LoadingController, private view: ViewController, private http: Http, private util: Funcoes, private alert: AlertController) {
     this.dataInicio = nav.get("dataInicio");
     this.dataFim = nav.get("dataFim");
     this.local = nav.get("local");
@@ -35,14 +36,19 @@ export class OrcamentoProdutosPage {
     let modal = this.modal.create(EscolheProdutosPage);
     modal.onDidDismiss(data =>{
       console.log("dismiss modal");
+      this.load = this.loading.create({
+        content: 'Aguarde...'
+      });
+      this.load.present();
       this.procuraProdutos();
     });
     modal.present();
   }
 
   procuraProdutos(){
-    this.http.get('http://192.168.1.108:3000/api/itensOrcamento/'+this.util.retornaIdOrcamento()).map(res => res.json()).subscribe(data => {
+    this.http.get('http://52.40.117.136:3000/api/itensOrcamento/'+this.util.retornaIdOrcamento()).map(res => res.json()).subscribe(data => {
       this.produtosList = data.data;
+      this.load.dismiss();
     });
   }
 
@@ -65,7 +71,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://192.168.1.108:3000/api/itensOrcamento/delete/'+item.id_item, {headers: headers}).subscribe(status => {
+                  this.http.put('http://52.40.117.136:3000/api/itensOrcamento/delete/'+item.id_item, {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast(item.nome+" removido do orçamento.");
@@ -105,7 +111,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://192.168.1.108:3000/api/orcamento/confirmar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
+                  this.http.put('http://52.40.117.136:3000/api/orcamento/confirmar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast("Orçamento enviado! Entraremos em contado, obrigado!");
@@ -142,7 +148,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://192.168.1.108:3000/api/orcamento/cancelar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
+                  this.http.put('http://52.40.117.136:3000/api/orcamento/cancelar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast("Orçamento cancelado!");

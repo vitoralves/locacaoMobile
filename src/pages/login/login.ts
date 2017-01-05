@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {AuthService} from '../autenticacao/authservico';
 import {CadastroPage} from '../cadastro/cadastro';
 import {TabsPage} from '../tabs/tabs';
-import {ToastController} from 'ionic-angular';
+import {ToastController, LoadingController} from 'ionic-angular';
 
 
 @Component({
@@ -13,27 +13,30 @@ import {ToastController} from 'ionic-angular';
 })
 export class LoginPage {
   usuario: any;
-  usuarioEncontrado: boolean = false;
   usercreds = {
     email: '',
     senha: ''
   }
 
-    constructor(public service: AuthService, public nav: NavController, private toast: ToastController) {}
+    constructor(public service: AuthService, public nav: NavController, private toast: ToastController, private loading: LoadingController) {}
 
-    login(user) {
+        login(user) {
+          let l = this.loading.create({
+            content: 'Autenticando...'
+        });
+        l.present();
+
         this.service.autenticar(user).then(data => {
             this.usuario = data.data;
             //salva id do cliente logado
             this.service.storeUserCredentials(data.data.id_cliente);
             if(this.usuario.id_cliente > 0) {
-              console.log("Abrir tela principal");
-              this.usuarioEncontrado = true;
-              console.log(this.usuarioEncontrado);
+              l.dismiss();
               this.nav.setRoot(TabsPage);
             }
          }).catch(e => {
              console.log("não encontrado "+e);
+             l.dismiss();
              this.mostrarToast("Usuário não encontrado!");
            });
     }

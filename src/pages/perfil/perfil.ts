@@ -18,7 +18,7 @@ export class PerfilPage {
   };
 
   constructor(public http: Http, public modal: ModalController, public viewCtrl: ViewController, private servico: AuthService, private toast: ToastController) {
-    this.http.get('http://192.168.1.108:3000/api/cliente/'+this.servico.retornaIdCliente()).map(res => res.json()).subscribe(data => {
+    this.http.get('http://52.40.117.136:3000/api/cliente/'+this.servico.retornaIdCliente()).map(res => res.json()).subscribe(data => {
       this.cliente = data.data;
       console.log(this.cliente);
     });
@@ -33,7 +33,7 @@ export class PerfilPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     var updateString = this.cliente.id_cliente+"/"+this.cliente.nome+"/"+this.cliente.sobrenome+"/"+this.cliente.email;
     return new Promise(resolve => {
-        this.http.put('http://192.168.1.108:3000/api/cliente/update/'+updateString, {headers: headers}).subscribe(status => {
+        this.http.put('http://52.40.117.136:3000/api/cliente/update/'+updateString, {headers: headers}).subscribe(status => {
             console.log("status"+status.status);
             if(status.status == 200){
                 resolve(true);
