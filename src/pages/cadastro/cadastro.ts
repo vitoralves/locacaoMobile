@@ -68,13 +68,11 @@ export class CadastroPage {
   }
 
   validaEmail(usuario){
-    if ((usuario.email.toLowerCase().match('^[a-zA-Z]\\w*@gmail\\.com$')) || (usuario.email.toLowerCase().match('^[a-zA-Z]\\w*@hotmail\\.com$'))) {
-console.log("true");
+    return true;
+    /*if ((usuario.email.toLowerCase().match('^[a-zA-Z]\\w*@gmail\\.com$')) || (usuario.email.toLowerCase().match('^[a-zA-Z]\\w*@hotmail\\.com$'))) {
       return true;
-
     }else{
-      console.log("false");
       return false;
-    }
+    }*/
   }
 }

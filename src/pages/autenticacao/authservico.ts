@@ -42,17 +42,8 @@ export class AuthService {
     }
 
     autenticar(user) {
-      this.checarInternet();
-      //salva email do cliente q está logando
-      this.storeUserCredentials(user.email);
-      if (user.email == ""){
-        this.mostrarToast("Insira seu email!");
-      }else if (user.senha == ""){
-        this.mostrarToast("Insira sua senha!");
-      }else{
         var creds = user.email+"/"+user.senha;
         return this.http.get('http://52.40.117.136:3000/api/auth/'+ creds).map(res => res.json()).toPromise();
-      }
     }
 
     adduser(usuario) {
