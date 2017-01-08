@@ -5,7 +5,7 @@ import {CadastroPage} from '../cadastro/cadastro';
 import {TabsPage} from '../tabs/tabs';
 import {ToastController, LoadingController, AlertController} from 'ionic-angular';
 //import { EmailComposer } from 'ionic-native';
-import {Http, Headers, Request, RequestMethod} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 
 @Component({
   templateUrl: 'login.html',
@@ -19,12 +19,8 @@ export class LoginPage {
     senha: ''
   }
 
-  mailgunUrl: string;
-  mailgunApiKey: string;
-
     constructor(public service: AuthService, public nav: NavController, private toast: ToastController, private loading: LoadingController, private alert:AlertController, private http: Http) {
-      this.mailgunUrl = "https://api.mailgun.net/v3/vitor.diogo.live@hotmail.com/messages";
-      this.mailgunApiKey = window.btoa("api:key-bdc815acaef659b2cbd2e1d93dae770c"); //windows.btoa=> string codificada na base 64
+
     }
 
     login(user) {
@@ -96,28 +92,22 @@ export class LoginPage {
                   var headers = new Headers();
                   headers.append('Content-Type', 'application/x-www-form-urlencoded');
                   return new Promise(resolve => {
-                    this.http.put('http://localhost:3000/api/redefinirSenha/'+idCliente+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
+                    this.http.put('http://52.40.117.136:3000/api/redefinirSenha/'+idCliente+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
                         console.log("status"+status.status);
                         if(status.status == 200){
-                          var requestHeaders = new Headers();
-                          requestHeaders.append("Authorization", "Basic " + this.mailgunApiKey);
-                          requestHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-                          this.http.request(new Request({
-                              method: RequestMethod.Post,
-                              url: this.mailgunUrl,
-                              body: "from=vitor.diogo.live@hotmail.com&to=" + email + "&subject= Redefinir senha Decoville App" + "&text= A senha foi temporariamente redefinida para "+novaSenha+" entre no aplicativo para escolher uma nova senha.",
-                              headers: requestHeaders
-                          }))
-                          .subscribe(success => {
-                            a.dismiss();
-                            this.mostrarToast("Enviaremos um e-mail com as informações para redefinir sua senha.");
-
-                          }, error => {
-                              console.log("ERROR -> " + JSON.stringify(error));
-                              a.dismiss();
-                              this.mostrarToast("Erro ao enviar e-mail.");                           
+                          return new Promise(resolve => {
+                            this.http.put('http://52.40.117.136:3000/api/enviaSenha/'+email+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
+                              if(status.status == 200){
+                                a.dismiss();
+                                this.mostrarToast("Enviaremos um e-mail com as informações para redefinição de senha.");
+                                resolve(true);
+                              }else{
+                                a.dismiss();
+                                this.mostrarToast("Não foi possível enviar e-mail.");
+                                resolve(false);
+                              }
+                            });
                           });
-                            resolve(true);
                         }else{
                           a.dismiss();
                           this.mostrarToast("Não foi possível redefinir senha.");
@@ -138,7 +128,7 @@ export class LoginPage {
     }
 
     emailExiste(email){
-      return this.http.get('http://localhost:3000/api/email/'+email).map(res => res.json()).toPromise();
+      return this.http.get('http://52.40.117.136:3000/api/email/'+email).map(res => res.json()).toPromise();
     }
 
   }

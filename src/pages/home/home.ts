@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { LoadingController, ModalController, ViewController, NavController, PopoverController} from 'ionic-angular';
+import { LoadingController, ModalController, ViewController, NavController, PopoverController, AlertController, ToastController} from 'ionic-angular';
 import { ModalProdutoPage } from '../modal-produto/modal-produto';
 import 'rxjs/add/operator/toPromise';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -23,10 +23,11 @@ export class HomePage {
   searchString: string = '';
   categoriaSelecionada = 'Tudo';
   categorias: any;
+  redefineSenha: boolean;
 
-  constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController,
-  private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController, private util: Funcoes) {
-  //  this.mostrarLoading();
+  constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController, private alert: AlertController,
+  private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController, private util: Funcoes, private toast: ToastController) {
+
     this.http.get('http://52.40.117.136:3000/api/produtos/').map(res => res.json()).subscribe(data => {
       this.produtos = data.data; // esse será usado para o filtro do searchbar será modificado
       this.todosProdutos = data.data; // esse é estático não muda mais
@@ -36,6 +37,36 @@ export class HomePage {
       this.categorias = data.data;
     });
 
+  }
+
+  ngOnInit(){
+    this.http.get('http://52.40.117.136:3000/api/trocarSenha/'+this.service.retornaIdCliente()).map(res => res.json()).subscribe(data => {
+          var redefinir = data.data;
+          if(redefinir.redefinirsenha == true){
+            let a = this.alert.create({
+              title: 'Redefinir Senha',
+              message: 'Escolha uma nova senha.',
+              inputs: [
+                {
+                  name: 'senha',
+                  placeholder: 'nova senha',
+                  type: 'password'
+                }
+              ],
+              buttons: [
+                {
+                  text: 'Redefinir',
+                  handler: data => {
+                    var senha = data.senha;
+                    this.alterarSenha(senha);
+                    a.dismiss();
+                  }
+                }
+              ]
+              });
+              a.present();
+            }
+          });
   }
 
   mostrarLoading(){
@@ -112,6 +143,29 @@ export class HomePage {
         return false;
       }
     });
+  }
+
+  mostrarToast(mensagem){
+    let toast = this.toast.create({
+          message: mensagem,
+          duration: 3000
+        });
+        toast.present();
+  }
+
+  alterarSenha(senha){
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return new Promise(resolve => {
+      this.http.put('http://52.40.117.136:3000/api/redefinirSenha/'+this.service.retornaIdCliente()+'/'+senha.toString(), {headers: headers}).subscribe(status => {
+          console.log("status"+status.status);
+          if(status.status == 200){
+            this.mostrarToast("Sua senha foi alterada com sucesso");
+          }else{
+            this.mostrarToast("Não foi possível alterar sua senha!");
+          }
+        });
+      });
   }
 
 }

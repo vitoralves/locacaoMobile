@@ -78,7 +78,7 @@ export class AuthService {
             this.loadUserCredentials();
             console.log(this.AuthToken);
             headers.append('Authorization', 'Bearer ' +this.AuthToken);
-            this.http.get('http://localhost:3333/getinfo', {headers: headers}).subscribe(data => {
+            this.http.get('http://52.40.117.136:3333/getinfo', {headers: headers}).subscribe(data => {
                 if(data.json().success)
                     resolve(data.json());
                 else
