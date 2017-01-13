@@ -10,7 +10,7 @@
   <ion-list>
     <ion-item *ngFor="let item of orcamento">
      <p>{{item.id_orcamento}} {{item.localevento}}, {{item.cidade}}</p>
-     <p>De:{{item.data_inicio}}  Até:{{item.data_fim}}
+     <p>De:{{item.data_entrega}}  Até:{{item.data_devolucao}}
      <p>Situação:{{item.situacao}}</p>
      <button ion-button outline icon-left item-right color="danger" (click)="ocultar(item)">
        <ion-icon name="eye-off"></ion-icon>

@@ -92,16 +92,22 @@ export class LoginPage {
                   var headers = new Headers();
                   headers.append('Content-Type', 'application/x-www-form-urlencoded');
                   return new Promise(resolve => {
-                    this.http.put('http://52.40.117.136:3000/api/redefinirSenha/'+idCliente+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
+                    this.http.put('http://35.167.130.147:3000/api/redefinirSenha/'+idCliente+'/'+novaSenha.toString()+'/true', {headers: headers}).subscribe(status => {
                         console.log("status"+status.status);
                         if(status.status == 200){
                           return new Promise(resolve => {
-                            this.http.put('http://52.40.117.136:3000/api/enviaSenha/'+email+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
+                            let l = this.loading.create({
+                              content: 'Enviando e-mail...'
+                            });
+                            l.present();
+                            this.http.put('http://35.167.130.147:3000/api/enviaSenha/'+email+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
                               if(status.status == 200){
+                                l.dismiss();
                                 a.dismiss();
-                                this.mostrarToast("Enviaremos um e-mail com as informações para redefinição de senha.");
+                                this.mostrarToast("Enviamos um e-mail com as informações para redefinição de senha.");
                                 resolve(true);
                               }else{
+                                l.dismiss();
                                 a.dismiss();
                                 this.mostrarToast("Não foi possível enviar e-mail.");
                                 resolve(false);
@@ -128,7 +134,7 @@ export class LoginPage {
     }
 
     emailExiste(email){
-      return this.http.get('http://52.40.117.136:3000/api/email/'+email).map(res => res.json()).toPromise();
+      return this.http.get('http://35.167.130.147:3000/api/email/'+email).map(res => res.json()).toPromise();
     }
 
   }

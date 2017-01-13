@@ -31,4 +31,25 @@ page-orcamento-produtos {
     padding: 0px !important;
   }
 
+  b{
+    float: left;
+  }
+
+  .datetime-md{
+    float: left;
+    padding: 0px;
+  }
+
+  .bar-buttons-md {
+    max-width: 30px;
+    float: left;
+  }
+
+  ion-title{
+    height: 32px;
+  }
+
+  .botao{
+    max-width: 110px !important;
+  }
 }

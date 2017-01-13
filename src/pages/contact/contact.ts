@@ -21,7 +21,7 @@ export class ContactPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     var stringInsert = this.assunto+"/"+this.mensagem+"/"+this.service.retornaIdCliente();
     return new Promise(resolve => {
-        this.http.put('http://52.40.117.136:3000/api/mensagem/add/'+stringInsert, {headers: headers}).subscribe(status => {
+        this.http.put('http://35.167.130.147:3000/api/mensagem/add/'+stringInsert, {headers: headers}).subscribe(status => {
             if(status.status == 200){
               resolve(true);
               this.assunto = '';

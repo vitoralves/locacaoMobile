@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ModalController, ViewController, ToastController} from 'ionic-angular';
+import { ModalController, ViewController, ToastController, LoadingController} from 'ionic-angular';
 import {AuthService} from '../autenticacao/authservico';
 
 @Component({
@@ -17,10 +17,9 @@ export class PerfilPage {
     email: ''
   };
 
-  constructor(public http: Http, public modal: ModalController, public viewCtrl: ViewController, private servico: AuthService, private toast: ToastController) {
-    this.http.get('http://52.40.117.136:3000/api/cliente/'+this.servico.retornaIdCliente()).map(res => res.json()).subscribe(data => {
+  constructor(public http: Http, public modal: ModalController, public viewCtrl: ViewController, private servico: AuthService, private toast: ToastController, private loading: LoadingController) {
+    this.http.get('http://35.167.130.147:3000/api/cliente/'+this.servico.retornaIdCliente()).map(res => res.json()).subscribe(data => {
       this.cliente = data.data;
-      console.log(this.cliente);
     });
   }
 
@@ -33,7 +32,7 @@ export class PerfilPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     var updateString = this.cliente.id_cliente+"/"+this.cliente.nome+"/"+this.cliente.sobrenome+"/"+this.cliente.email;
     return new Promise(resolve => {
-        this.http.put('http://52.40.117.136:3000/api/cliente/update/'+updateString, {headers: headers}).subscribe(status => {
+        this.http.put('http://35.167.130.147:3000/api/cliente/update/'+updateString, {headers: headers}).subscribe(status => {
             console.log("status"+status.status);
             if(status.status == 200){
                 resolve(true);

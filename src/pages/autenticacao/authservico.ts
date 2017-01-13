@@ -43,7 +43,7 @@ export class AuthService {
 
     autenticar(user) {
         var creds = user.email+"/"+user.senha;
-        return this.http.get('http://52.40.117.136:3000/api/auth/'+ creds).map(res => res.json()).toPromise();
+        return this.http.get('http://35.167.130.147:3000/api/auth/'+ creds).map(res => res.json()).toPromise();
     }
 
     adduser(usuario) {
@@ -53,7 +53,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
         return new Promise(resolve => {
-            this.http.put('http://52.40.117.136:3000/api/add/'+creds, {headers: headers}).subscribe(status => {
+            this.http.put('http://35.167.130.147:3000/api/add/'+creds, {headers: headers}).subscribe(status => {
                 console.log("status"+status.status);
                 if(status.status == 200){
                     resolve(true);
@@ -78,7 +78,7 @@ export class AuthService {
             this.loadUserCredentials();
             console.log(this.AuthToken);
             headers.append('Authorization', 'Bearer ' +this.AuthToken);
-            this.http.get('http://52.40.117.136:3333/getinfo', {headers: headers}).subscribe(data => {
+            this.http.get('http://52.40.117.13652.40.117.136:3333/getinfo', {headers: headers}).subscribe(data => {
                 if(data.json().success)
                     resolve(data.json());
                 else
@@ -101,7 +101,7 @@ export class AuthService {
     }
 
     emailCadastrado(email){
-      return this.http.get('http://52.40.117.136:3000/api/email/'+ email).map(res => res.json()).toPromise();
+      return this.http.get('http://35.167.130.147:3000/api/email/'+ email).map(res => res.json()).toPromise();
     }
 
     checarInternet() {

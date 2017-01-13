@@ -1,13 +1,19 @@
 <ion-header>
   <ion-navbar color="azul">
+    <ion-buttons>
+      <button ion-button icon-only (click)="cancelarOrcamento()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title >
-      <h6>
         Itens Orçamento
-      </h6>
     </ion-title>
-    <ion-buttons start>
-      <button ion-button outline (click)="cancelarOrcamento()" color="branco">
+    <ion-buttons end class="botao">
+      <!--<button ion-button outline (click)="cancelarOrcamento()" color="branco">
         CANCELAR
+      </button>-->
+      <button ion-button outline (click)="enviaOrcamento()" color="branco" >
+        FINALIZAR
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -22,8 +28,8 @@
     </ion-row>
 
     <ion-row>
-      <ion-col width-50><b>Data início:</b> {{dataInicio}}</ion-col>
-      <ion-col width-50><b>Data fim:</b> {{dataFim}}</ion-col>
+      <ion-col width-50><b>Data Entrega:</b><ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="dataEntrega"></ion-datetime></ion-col>
+      <ion-col width-50><b>Data Devolução:</b><ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="dataDevolucao"></ion-datetime></ion-col>
     </ion-row>
     <ion-row>
       <ion-col width-50><b>Local evento:</b> {{local}}</ion-col>
@@ -64,10 +70,14 @@
   </ion-list>
 
   <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="insereProduto()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+  <!--<ion-fab right bottom>
     <button ion-fab color="primary"><ion-icon name="arrow-up"></ion-icon></button>
     <ion-fab-list side="top">
       <button ion-fab (click)="insereProduto()"><ion-icon name="add"></ion-icon></button>
       <button ion-fab (click)="enviaOrcamento()" ><ion-icon name="send"></ion-icon></button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab>-->
 </ion-content>
