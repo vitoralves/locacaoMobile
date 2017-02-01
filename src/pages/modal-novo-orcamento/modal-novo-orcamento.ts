@@ -50,7 +50,7 @@ export class ModalNovoOrcamentoPage {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     var stringInsert = this.orcNovo.cliente+"/"+this.orcNovo.dataEvento+"/"+this.orcNovo.dataDevolucao+"/"+this.orcNovo.localEvento+"/"+this.orcNovo.situacao+"/"+this.orcNovo.cidade+"/"+this.orcNovo.ativo+"/"+this.orcNovo.endereco+"/"+this.orcNovo.dataEntrega;
-    this.http.get('http://35.167.130.147:3000/api/orcamento/add/'+stringInsert).map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:3000/api/orcamento/add/'+stringInsert).map(res => res.json()).subscribe(data => {
         this.id_orcamento = data.data;
         console.log(this.id_orcamento[0].id_orcamento);
         if(this.id_orcamento[0].id_orcamento > 0){
@@ -88,7 +88,7 @@ export class ModalNovoOrcamentoPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     return new Promise(resolve => {
       var stringAdd = this.id_produto_catalogo+"/"+this.quantidade_catalogo+"/"+this.funcao.retornaIdOrcamento()
-      this.http.put('http://35.167.130.147:3000/api/itemOrcamento/add/'+stringAdd, {headers: headers}).subscribe(status => {
+      this.http.put('http://localhost:3000/api/itemOrcamento/add/'+stringAdd, {headers: headers}).subscribe(status => {
        console.log("status"+status.status);
          if(status.status == 200){
            this.mostrarToast("Produto "+this.id_produto_catalogo+" adicionado ao orçamento.");

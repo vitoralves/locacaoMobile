@@ -28,19 +28,19 @@ export class HomePage {
   constructor(public http: Http, public loading: LoadingController, public modal: ModalController, public viewCtrl: ViewController, private alert: AlertController,
   private dom: DomSanitizer, public service: AuthService, private nav: NavController, private popover: PopoverController, private util: Funcoes, private toast: ToastController) {
 
-    this.http.get('http://35.167.130.147:3000/api/produtos/').map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:3000/api/produtos/').map(res => res.json()).subscribe(data => {
       this.produtos = data.data; // esse será usado para o filtro do searchbar será modificado
       this.todosProdutos = data.data; // esse é estático não muda mais
     });
 
-    this.http.get('http://35.167.130.147:3000/api/categorias/').map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:3000/api/categorias/').map(res => res.json()).subscribe(data => {
       this.categorias = data.data;
     });
 
   }
 
   ngOnInit(){
-    this.http.get('http://35.167.130.147:3000/api/trocarSenha/'+this.service.retornaIdCliente()).map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:3000/api/trocarSenha/'+this.service.retornaIdCliente()).map(res => res.json()).subscribe(data => {
           var redefinir = data.data;
           if(redefinir.redefinirsenha == true){
             let a = this.alert.create({
@@ -87,7 +87,7 @@ export class HomePage {
 
   pesquisaProdutoPorId(id){
     this.produtoSelecionado = null;
-    return this.http.get('http://35.167.130.147:3000/api/produtos/'+ id).map(res => res.json()).toPromise();
+    return this.http.get('http://localhost:3000/api/produtos/'+ id).map(res => res.json()).toPromise();
   }
 
   modalProdutoSelecionado(){
@@ -157,7 +157,7 @@ export class HomePage {
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     return new Promise(resolve => {
-      this.http.put('http://35.167.130.147:3000/api/redefinirSenha/'+this.service.retornaIdCliente()+'/'+senha.toString()+'/false', {headers: headers}).subscribe(status => {
+      this.http.put('http://localhost:3000/api/redefinirSenha/'+this.service.retornaIdCliente()+'/'+senha.toString()+'/false', {headers: headers}).subscribe(status => {
           console.log("status"+status.status);
           if(status.status == 200){
             this.mostrarToast("Sua senha foi alterada com sucesso");

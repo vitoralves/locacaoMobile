@@ -23,12 +23,12 @@ export class EscolheProdutosPage {
   constructor(private modal: ModalController, private nav: NavParams, private view: ViewController, private util: Funcoes,
     private http: Http, private dom: DomSanitizer, public navCtrl: NavController, private alert: AlertController, private service: AuthService, private loading: LoadingController) {
 
-    this.http.get('http://35.167.130.147:3000/api/produtos/detalhado').map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:3000/api/produtos/detalhado').map(res => res.json()).subscribe(data => {
       this.produtos = data.data;
       this.todosProdutos = data.data;
     });
 
-    this.http.get('http://35.167.130.147:3000/api/categorias/').map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:3000/api/categorias/').map(res => res.json()).subscribe(data => {
       this.categorias = data.data;
     });
 
@@ -55,7 +55,7 @@ export class EscolheProdutosPage {
          headers.append('Content-Type', 'application/x-www-form-urlencoded');
          return new Promise(resolve => {
            var stringAdd = produto.id_produto+"/"+this.quantidade[0]+"/"+this.util.retornaIdOrcamento()
-           this.http.put('http://35.167.130.147:3000/api/itemOrcamento/add/'+stringAdd, {headers: headers}).subscribe(status => {
+           this.http.put('http://localhost:3000/api/itemOrcamento/add/'+stringAdd, {headers: headers}).subscribe(status => {
             console.log("status"+status.status);
               if(status.status == 200){
                 this.util.mostrarToast("Produto "+produto.id_produto+" adicionado ao orçamento.");

@@ -92,7 +92,7 @@ export class LoginPage {
                   var headers = new Headers();
                   headers.append('Content-Type', 'application/x-www-form-urlencoded');
                   return new Promise(resolve => {
-                    this.http.put('http://35.167.130.147:3000/api/redefinirSenha/'+idCliente+'/'+novaSenha.toString()+'/true', {headers: headers}).subscribe(status => {
+                    this.http.put('http://localhost:3000/api/redefinirSenha/'+idCliente+'/'+novaSenha.toString()+'/true', {headers: headers}).subscribe(status => {
                         console.log("status"+status.status);
                         if(status.status == 200){
                           return new Promise(resolve => {
@@ -100,7 +100,7 @@ export class LoginPage {
                               content: 'Enviando e-mail...'
                             });
                             l.present();
-                            this.http.put('http://35.167.130.147:3000/api/enviaSenha/'+email+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
+                            this.http.put('http://localhost:3000/api/enviaSenha/'+email+'/'+novaSenha.toString(), {headers: headers}).subscribe(status => {
                               if(status.status == 200){
                                 l.dismiss();
                                 a.dismiss();
@@ -134,7 +134,7 @@ export class LoginPage {
     }
 
     emailExiste(email){
-      return this.http.get('http://35.167.130.147:3000/api/email/'+email).map(res => res.json()).toPromise();
+      return this.http.get('http://localhost:3000/api/email/'+email).map(res => res.json()).toPromise();
     }
 
   }

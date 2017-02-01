@@ -45,7 +45,7 @@ export class OrcamentoProdutosPage {
       content: 'Aguarde...'
     });
     l.present();
-    this.http.get('http://35.167.130.147:3000/api/itensOrcamento/'+this.util.retornaIdOrcamento()).map(res => res.json()).subscribe(data => {
+    this.http.get('http://localhost:3000/api/itensOrcamento/'+this.util.retornaIdOrcamento()).map(res => res.json()).subscribe(data => {
       this.produtosList = data.data;
     });
     l.dismiss();
@@ -70,7 +70,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://35.167.130.147:3000/api/itensOrcamento/delete/'+item.id_item, {headers: headers}).subscribe(status => {
+                  this.http.put('http://localhost:3000/api/itensOrcamento/delete/'+item.id_item, {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast(item.nome+" removido do orçamento.");
@@ -110,7 +110,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://35.167.130.147:3000/api/orcamento/confirmar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
+                  this.http.put('http://localhost:3000/api/orcamento/confirmar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast("Orçamento enviado! Entraremos em contado, obrigado!");
@@ -147,7 +147,7 @@ export class OrcamentoProdutosPage {
               headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
               return new Promise(resolve => {
-                  this.http.put('http://35.167.130.147:3000/api/orcamento/cancelar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
+                  this.http.put('http://localhost:3000/api/orcamento/cancelar/'+this.util.retornaIdOrcamento(), {headers: headers}).subscribe(status => {
                       console.log("status"+status.status);
                       if(status.status == 200){
                           this.util.mostrarToast("Orçamento cancelado!");
